@@ -87,6 +87,11 @@
         <rosparam file="$(find hurba_exploration)/config/global_planner_params.yaml" command="load" />
     </node>
 
+    <node pkg="hector_trajectory_server" type="hector_trajectory_server" respawn="false" name="hector_trajectory_server" output="screen">
+        <param name="source_frame_name" value="base_footprint"/>
+        <param name="target_frame_name" value="map"/>
+    </node>
+
     <!--launch rviz and remap initialpose topic to waypoint for waypoints navigation-->
     <node name="rviz" pkg="rviz" type="rviz" respawn="false" args="-d $(find hurba_exploration)/rviz/exploration.rviz">
     </node>
