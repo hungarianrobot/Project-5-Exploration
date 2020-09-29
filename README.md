@@ -15,12 +15,13 @@
 - [Gazebo 9](http://wiki.ros.org/gazebo_ros_pkgs "Gazebo ROS package")
 - [RViz](http://wiki.ros.org/rviz "RViz")
 - [Teleop twist keyboard](http://wiki.ros.org/teleop_twist_keyboard "Teleop twist keyboard")
-- [move_base](http://wiki.ros.org/move_base "move_base")
-- [robot_pose_ekf](http://wiki.ros.org/robot_pose_ekf "robot_pose_ekf")
-- [cob_base_velocity_smoother](http://wiki.ros.org/cob_base_velocity_smoother "cob_base_velocity_smoother")
-- [teb_local_planner](http://wiki.ros.org/teb_local_planner "teb_local_planner")
-- Gmapping
-- Exploration: http://wiki.ros.org/explore_lite
+- [Move Base](http://wiki.ros.org/move_base "move_base")
+- [Robot Pose EKF](http://wiki.ros.org/robot_pose_ekf "robot_pose_ekf")
+- [Velocity Smoother](http://wiki.ros.org/cob_base_velocity_smoother "cob_base_velocity_smoother")
+- [TEB Local Planner](http://wiki.ros.org/teb_local_planner "teb_local_planner")
+- [Gmapping](http://wiki.ros.org/gmapping "gmapping")
+- [Exploration](http://wiki.ros.org/explore_lite "explore_lite")
+- [Hector trajectory server](https://wiki.ros.org/hector_trajectory_server "hector_trajectory_server")
 
 ### Project build instrctions:
 1. Clone this repo inside the `src` folder of a catkin workspace:
