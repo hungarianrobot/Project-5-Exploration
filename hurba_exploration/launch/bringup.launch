@@ -4,6 +4,12 @@
     <!-- Launch other relevant files-->
     <include file="$(find hurba_exploration)/launch/world.launch"/>
 
+    <!-- Map Server -->
+    <arg name="map_file" default="$(find hurba_exploration)/maps/map.yaml"/>
+    <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)">
+        <remap from="map" to="map_gt"/>
+    </node>
+
     <node pkg="robot_pose_ekf" type="robot_pose_ekf" name="robot_pose_ekf">
         <remap from="imu_data" to="imu"/>
         <param name="output_frame" value="odom_combined"/>
@@ -56,10 +62,10 @@
         <param name="particles" value="30"/>
 
         <!-- Initial map size  -->
-        <param name="xmin" value="-20.0"/>
-        <param name="ymin" value="-20.0"/>
-        <param name="xmax" value="20.0"/>
-        <param name="ymax" value="20.0"/>
+        <param name="xmin" value="-10.0"/>
+        <param name="ymin" value="-10.0"/>
+        <param name="xmax" value="10.0"/>
+        <param name="ymax" value="10.0"/>
 
         <!-- Processing parameters (resolution of the map)  -->
         <param name="delta" value="0.025"/>
