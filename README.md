@@ -61,11 +61,26 @@ ERROR TF multiple authority contention:
 
 ### Exploration launch file
 
-1. Start the exploration: `roslaunch hurba_exploration explore.launch`
+- Start the exploration: `roslaunch hurba_exploration explore.launch`
 
 ![alt text][image4]
 
-### Rosgraph of exploration
+### Twist mux and velocity smoother:
+There are two additional nodes in the command chain of the simulated robot:
+- Twist mux (twist_mux)
+- Velocity smoother (cob_base_velocity_smoother)
+
+#### Twist mux:
+There might be several input sources that can control the robot (e.g. navigation stack, keyboard control, joystick control). Twist mux node can select the highest priority control source based on these two config files:
+- twist_mux_locks.yaml
+- twist_mux_topics.yaml
+  
+In our case, the robot can be controlled by the navigitaion stack (that is commanded by the exploration) and the keyboard teleop tool. The keyboard control has a higher priority so the operator can overdrive the navigion stack's command anytime.
+
+#### Velocity smoother:
+When the twist mux selected the highest priority command signal, it goes into the velocity smoother. The output of velocity smoother generates the final `cmd_vel` command that drives the simulated robot. The velocity smoother node is responsible for limiting the maximum acceleration and decceleration and stopping the robot when there is no command signal.
+
+### Rosgraph of exploration:
 ![alt text][image6]
 
 ### TF tree of the project:
