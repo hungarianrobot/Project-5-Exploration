@@ -71,11 +71,29 @@
 
     <node name="cob_base_velocity_smoother" pkg="cob_base_velocity_smoother"  type="cob_base_velocity_smoother" output="screen">
         <remap from="output" to="cmd_vel"/>
+        <remap from="input" to="twist_mux/cmd_vel"/>
+        <param name="circular_buffer_capacity" value="12"/>
+        <param name="maximal_time_delay" value="2"/>
+        <param name="maximal_time_delay_to_stop" value="0.5"/>
+        <param name="thresh_max_acc" value="0.05"/>
+        <param name="loop_rate" value="20"/>
+        <param name="min_input_rate" value="1"/>
     </node>
+
+    <arg name="cmd_vel_out" default="twist_mux/cmd_vel"/>
+    <arg name="config_locks"  default="$(find hurba_exploration)/config/twist_mux_locks.yaml"/>
+    <arg name="config_topics" default="$(find hurba_exploration)/config/twist_mux_topics.yaml"/>
+    <node pkg="twist_mux" type="twist_mux" name="twist_mux" output="screen">
+        <remap from="cmd_vel_out" to="$(arg cmd_vel_out)"/>
+
+        <rosparam file="$(arg config_locks)"  command="load"/>
+        <rosparam file="$(arg config_topics)" command="load"/>
+    </node>
+
 
     <!-- Move Base -->
     <node name="move_base" pkg="move_base" type="move_base" respawn="false" output="screen">
-        <remap from="cmd_vel" to="input"/>
+        <remap from="cmd_vel" to="nav_vel"/>
         <param name="base_global_planner" value="global_planner/GlobalPlanner" />
         <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS"/>
         <param name="transform_tolerance" value="0.2"/>
